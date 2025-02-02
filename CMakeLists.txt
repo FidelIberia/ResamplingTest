@@ -56,11 +56,7 @@ add_subdirectory(modules/clap-juce-extensions EXCLUDE_FROM_ALL)
 add_subdirectory (modules/melatonin_inspector)
 
 # Agregar r8brain como subdirectorio
-add_subdirectory(modules/r8brain-free-src)
-# Crear una librería estática para r8brain
-file(GLOB_RECURSE R8BRAIN_SRC CONFIGURE_DEPENDS "modules/r8brain-free-src/*.cpp" "modules/r8brain-free-src/*.h")
-add_library(r8brain STATIC ${R8BRAIN_SRC})
-target_include_directories(r8brain PUBLIC modules/r8brain-free-src)
+include("${CMAKE_CURRENT_SOURCE_DIR}/r8brain-free-src.txt")
 
 # See `docs/CMake API.md` in the JUCE repo for all config options
 juce_add_plugin("${PROJECT_NAME}"

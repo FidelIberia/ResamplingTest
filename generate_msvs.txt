@@ -1,0 +1,1 @@
+cmake -B Builds -G "Visual Studio 17 2022" -A x64 -DENABLE_MULTICHANNEL=ON -DIPP_DIR="C:\Program Files (x86)\Intel\oneAPI\ipp\latest\lib\cmake\ipp"
