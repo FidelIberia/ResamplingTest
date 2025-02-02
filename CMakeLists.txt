@@ -55,6 +55,13 @@ add_subdirectory(modules/clap-juce-extensions EXCLUDE_FROM_ALL)
 # This adds the melatonin inspector module
 add_subdirectory (modules/melatonin_inspector)
 
+# Agregar r8brain como subdirectorio
+add_subdirectory(modules/r8brain-free-src)
+# Crear una librería estática para r8brain
+file(GLOB_RECURSE R8BRAIN_SRC CONFIGURE_DEPENDS "modules/r8brain-free-src/*.cpp" "modules/r8brain-free-src/*.h")
+add_library(r8brain STATIC ${R8BRAIN_SRC})
+target_include_directories(r8brain PUBLIC modules/r8brain-free-src)
+
 # See `docs/CMake API.md` in the JUCE repo for all config options
 juce_add_plugin("${PROJECT_NAME}"
     # Icons for the standalone app
@@ -146,7 +153,8 @@ target_link_libraries(SharedCode
     juce_gui_extra
     juce::juce_recommended_config_flags
     juce::juce_recommended_lto_flags
-    juce::juce_recommended_warning_flags)
+    juce::juce_recommended_warning_flags
+    r8brain)
 
 # Link the JUCE plugin targets our SharedCode target
 target_link_libraries("${PROJECT_NAME}" PRIVATE SharedCode)
